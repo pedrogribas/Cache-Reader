@@ -19,12 +19,13 @@ public class MappingType {
             memory.tagBits = memory.getMemBitSize() - lineBits - memory.getBlockBitSize();
         }
         // Mapeamento associativo
-        else if (memory.getSets() < memory.getLines())
-            memory.tagBits = memory.getMemBitSize() - memory.setSizes;
+        else if (memory.getSets() < memory.getLines() && memory.getLines() != memory.getLanes())
+        memory.tagBits = memory.getMemBitSize() - memory.getBlockBitSize() - memory.setSizes;
+
 
         // Completamente associativo
         else if (memory.getSets() == 1)
-            memory.tagBits = memory.getMemBitSize() - memory.blockBitSize - memory.setSizes;
+        memory.tagBits = memory.getMemBitSize() - memory.blockBitSize;
 
         ArrayList<Integer> cacheSetList = new ArrayList<>();
 
